@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:iron_dictionary/screens/home_page.dart';
+import 'screens/home_page.dart';
+import 'screens/splah_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -10,9 +11,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: HomePage(),
+      home: SplashScreen(),
     );
   }
 }

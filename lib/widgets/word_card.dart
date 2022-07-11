@@ -14,12 +14,12 @@ class WordCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
         width: double.infinity,
-        margin: EdgeInsets.all(10),
-        padding: EdgeInsets.all(15),
+        margin: const EdgeInsets.all(10),
+        padding: const EdgeInsets.all(15),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(5),
             color: Colors.white,
-            boxShadow: [
+            boxShadow: const [
               BoxShadow(color: Colors.grey, offset: Offset(0, 1), blurRadius: 5)
             ]),
         child: Column(
@@ -27,7 +27,7 @@ class WordCard extends StatelessWidget {
           children: [
             Text(
               origin.toUpperCase()[0] + origin.toLowerCase().substring(1),
-              style: TextStyle(
+              style: const TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 20,
               ),

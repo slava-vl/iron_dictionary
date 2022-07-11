@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:iron_dictionary/dummy_data.dart';
 
+import '../dummy_data.dart';
 import '../models/word.dart';
 import '../widgets/word_card.dart';
 
@@ -33,7 +33,7 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        title: Text(
+        title: const Text(
           'ID',
           style: TextStyle(color: Colors.black, fontSize: 30),
         ),
@@ -42,7 +42,7 @@ class _HomePageState extends State<HomePage> {
             onPressed: () {
               _toggleSearchingMode();
             },
-            icon: Icon(
+            icon: const Icon(
               Icons.search_outlined,
               color: Colors.black,
             ),
@@ -50,42 +50,40 @@ class _HomePageState extends State<HomePage> {
         ],
         centerTitle: true,
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            AnimatedCrossFade(
-              firstChild: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 10),
-                child: TextField(
-                  onChanged: (value) {
-                    setState(() {
-                      value = value.toLowerCase().trim();
-                      _words = words
-                          .where((element) =>
-                              element.origin.toLowerCase().contains(value)
-                              || element.translate.toLowerCase().contains(value)
-                              )
-                              
-                          .toList();
-                    });
-                  },
-                  decoration: InputDecoration(
-                    hintText: 'Поиск',
-                    border: InputBorder.none,
-                    suffixIcon: IconButton(
-                      icon: Icon(Icons.close),
-                      onPressed: _toggleSearchingMode,
-                    ),
+      body: Column(
+        children: [
+          AnimatedCrossFade(
+            firstChild: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: TextField(
+                onChanged: (value) {
+                  setState(() {
+                    value = value.toLowerCase().trim();
+                    _words = words
+                        .where((element) =>
+                            element.origin.toLowerCase().contains(value) ||
+                            element.translate.toLowerCase().contains(value))
+                        .toList();
+                  });
+                },
+                decoration: InputDecoration(
+                  hintText: 'Поиск',
+                  border: InputBorder.none,
+                  suffixIcon: IconButton(
+                    icon: const Icon(Icons.close),
+                    onPressed: _toggleSearchingMode,
                   ),
                 ),
               ),
-              secondChild: SizedBox(width: double.infinity),
-              duration: Duration(milliseconds: 200),
-              crossFadeState: _isSearchingMode
-                  ? CrossFadeState.showFirst
-                  : CrossFadeState.showSecond,
             ),
-            Column(
+            secondChild: const SizedBox(width: double.infinity),
+            duration: const Duration(milliseconds: 200),
+            crossFadeState: _isSearchingMode
+                ? CrossFadeState.showFirst
+                : CrossFadeState.showSecond,
+          ),
+          Expanded(
+            child: ListView(
               children: [
                 ..._words
                     .map((word) => WordCard(
@@ -93,22 +91,10 @@ class _HomePageState extends State<HomePage> {
                           translate: word.translate,
                         ))
                     .toList(),
-                ..._words
-                    .map((word) => WordCard(
-                          origin: word.origin,
-                          translate: word.translate,
-                        ))
-                    .toList(),
-                ..._words
-                    .map((word) => WordCard(
-                          origin: word.origin,
-                          translate: word.translate,
-                        ))
-                    .toList(),
               ],
-            )
-          ],
-        ),
+            ),
+          ),
+        ],
       ),
     );
   }
